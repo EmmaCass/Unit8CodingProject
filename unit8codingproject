@@ -1,0 +1,143 @@
+import java.util.Scanner;
+public class ConnectFour {
+   public static void main(String[] args) {
+       Scanner answer = new Scanner(System.in);
+
+       String[][] gameBoard = new String[6][7];
+       for (int i = 0; i < gameBoard.length; i++) {
+           for (int j = 0; j < gameBoard[r].length; j++) {
+               gameBoard[i][j] = " ";
+           }
+       }
+
+  
+       printGameboard(gameBoard);
+
+       int turn = 1;
+       int j = 0;
+       boolean playerWon = false;
+
+       while (!playerWon) {
+           if (turn == 1) {
+               System.out.println("Player 1, drop a red disk at column (1-6)");
+               j = answer.nextInt();
+               for (int i = gameBoard.length - 1; i >= 0; i--) {
+                   if (gameBoard[i][j].equals(" ")) {
+                       gameBoard[i][j] = "R";
+                       break;
+                   }
+               }
+           } else {
+               System.out.println("Player 2, drop a yellow disk at column (1-6)");
+               j = answer.nextInt();//Get user input for the chosen column
+               for (int i = gameBoard.length - 1; i >= 0; i--) {
+                   if(gameBoard[i][j].equals(" ")) {
+                       gameBoard[i][j] = "Y";
+                       break;
+                   }
+               }
+           }
+
+           printGameboard(gameBoard);
+           // Check if anyone has won or if it's a draw
+           if (checkWinner(gameBoard).equals("Y")) {
+               System.out.println("Player 2 Wins!");
+               playerWon = true;
+           } else if (checkWinner(gameBoard).equals("R")) {
+               System.out.println("Player 1 Wins!");
+               playerWon = true;
+           } else if (checkWinner(gameBoard).equals("FULL")) {
+               System.out.println("Gameboard is filled up. It is a tie!");
+           }
+           // Switch player's turn
+           if (turn == 1) {
+               turn = 2;
+           } else {
+               turn = 1;
+           }
+       }
+   }
+   public static void printGameboard(String[][] game) {
+       for(String[] row: game) {
+           for (String x : row) {
+               System.out.print(x + " | " );
+           }
+           System.out.println("");
+       }
+       System.out.println("-----------------------");
+   }
+
+
+   public static String checkWinner(String[][] game) {
+for (int i = 0; i < game.length; i++) {
+for (int j = 0; j <= game[row].length - 4; j++) {
+    if (game[i][j].equals("R") && game[i][j+1].equals("R") && game[i][j+2].equals("R") && game[i][j+3].equals("R")) {
+                   return "R";
+               }
+    if (game[i][j].equals("Y") && game[i][j+1].equals("Y") && game[i][j+2].equals("Y") && game[i][j+3].equals("Y")) {
+                   return "Y";
+               }
+           }
+       }
+for (int j = 0; j < game[0].length; j++) {
+for (int i = 0; i <= game.length - 4; i++) {
+  if (game[i][j].equals("R") && game[j+1][i].equals("R") && game[i+2][j].equals("R") && game[i+3][j].equals("R")) {
+                   return "R";
+               }
+               if (game[row][col].equals("Y") && game[i+1][j].equals("Y") &&game[i+2][j].equals("Y") && game[i+3][j].equals("Y")) {
+return "Y";
+               }
+           }
+       }
+for (int i = 0; i<= game.length - 4; i++) {
+for (int j = 0; j <= game[row].length - 4; j++) {
+  if (game[i][j].equals("R") && game[i+1][j+1].equals("R") && game[i+2][j+2].equals("R") && game[i+3][j+3].equals("R")) {
+                   return "R";
+               }
+  if (game[i][j].equals("Y") && game[i+1][j+1].equals("Y") && game[i+2][j+2].equals("Y") && game[i+3][j+3].equals("Y")) {
+                   return "Y";
+               }
+           }
+       }
+
+
+for (int i = 0; i <= game.length - 4; i++) {
+for (int j = 3; j < game[row].length; j++) {
+   if (game[i][j].equals("R") && game[i+1][j-1].equals("R") && game[i+2][j-2].equals("R") && game[i+3][j-3].equals("R")) {
+                   return "R";
+               }
+   if (game[i][j].equals("Y") && game[i+1][j-1].equals("Y") && game[i+2][j-2].equals("Y") && game[i+3][j-3].equals("Y")) {
+                   return "Y";
+               }
+           }
+       }
+
+
+for (int i = 0; i < game.length; i++) {
+for (int j = 0; j < game[row].length; j++) {
+    if (game[i][j].equals(" ")) {
+                   return "GO";
+               }
+           }
+       }
+       return "DRAW";
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
